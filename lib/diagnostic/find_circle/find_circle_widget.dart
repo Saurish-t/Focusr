@@ -10,8 +10,63 @@ import 'package:provider/provider.dart';
 import 'find_circle_model.dart';
 export 'find_circle_model.dart';
 
+class CircleDrawingWidget extends StatelessWidget {
+  final Offset circlePosition;
+
+  const CircleDrawingWidget({Key? key, required this.circlePosition})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomPaint(
+      painter: CirclePainter(position: circlePosition),
+      child: Container(
+        width: double.infinity,
+        height: double.infinity,
+      ),
+    );
+  }
+}
+
+class CirclePainter extends CustomPainter {
+  final Offset position;
+  final double radius;
+  final Color color;
+
+  CirclePainter({
+    required this.position,
+    this.radius = 10,
+    this.color = Colors.red,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..color = color
+      ..style = PaintingStyle.fill;
+
+    canvas.drawCircle(position, radius, paint);
+  }
+
+  @override
+  bool shouldRepaint(CirclePainter oldDelegate) {
+    return oldDelegate.position != position ||
+        oldDelegate.radius != radius ||
+        oldDelegate.color != color;
+  }
+}
+
 class FindCircleWidget extends StatefulWidget {
-  const FindCircleWidget({super.key});
+  final double gazeX;
+  final double gazeY;
+  final Function(double, double) onGazeValuesUpdated;
+
+  const FindCircleWidget({
+    Key? key,
+    required this.gazeX,
+    required this.gazeY,
+    required this.onGazeValuesUpdated,
+  }) : super(key: key);
 
   @override
   State<FindCircleWidget> createState() => _FindCircleWidgetState();
@@ -232,6 +287,19 @@ class _FindCircleWidgetState extends State<FindCircleWidget> {
                               ),
                             ),
                           ),
+                        Align(
+                          alignment: Alignment.topCenter,
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                                top: 20), // Adjust this value as needed
+                            child: Center(
+                              child: Text(
+                                'Gaze X: ${widget.gazeX}, Gaze Y: ${widget.gazeY}',
+                                style: TextStyle(fontSize: 15),
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
