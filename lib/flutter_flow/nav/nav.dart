@@ -155,7 +155,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'findCircle',
               path: 'findCircle',
-              builder: (context, params) => FindCircleWidget(),
+              builder: (context, params) => FindCircleWidget(
+                gazeX: 0.0,
+                gazeY: 0.0,
+                onGazeValuesUpdated: (x, y) {},
+              ),
             ),
             FFRoute(
               name: 'TimerGame',
@@ -165,7 +169,14 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'ParthivTest',
               path: 'parthivTest',
-              builder: (context, params) => ParthivTestWidget(),
+              builder: (context, params) => ParthivTestWidget(
+                onCalibrationComplete: () {
+                  print('Calibration complete');
+                },
+                onGazeValuesUpdated: (double x, double y) {
+                  print('New gaze values: x=$x, y=$y');
+                },
+              ),
             ),
             FFRoute(
               name: 'Chatbot',
