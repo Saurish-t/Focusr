@@ -9,6 +9,9 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:focus_r/custom_code/widgets/combined_code_widget.dart';
+import 'package:focus_r/server/parthiv_test/parthiv_test_widget.dart';
+import 'package:focus_r/diagnostic/find_circle/find_circle_widget.dart';
 import 'info_model.dart';
 export 'info_model.dart';
 
@@ -111,7 +114,12 @@ class _InfoWidgetState extends State<InfoWidget> {
                                   'INFO_PAGE_Container_nh1nozuf_ON_TAP');
                               logFirebaseEvent('Container_navigate_to');
 
-                              context.pushNamed('findCircle');
+                              // context.pushNamed('findCircle');
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => CombinedProgramWidget(),
+                                ),
+                              );
                             },
                             child: Container(
                               width: double.infinity,
