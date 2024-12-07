@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:provider/provider.dart';
 import 'study_model.dart';
 export 'study_model.dart';
@@ -150,8 +151,32 @@ class _StudyWidgetState extends State<StudyWidget> {
                                         color: Colors.white,
                                         size: 30.0,
                                       ),
-                                      onPressed: () {
-                                        print('IconButton pressed ...');
+                                      onPressed: () async {
+                                        logFirebaseEvent(
+                                            'STUDY_PAGE_play_arrow_ICN_ON_TAP');
+                                        logFirebaseEvent(
+                                            'IconButton_update_page_state');
+                                        _model.playingSound =
+                                            !_model.playingSound;
+                                        safeSetState(() {});
+                                        if (_model.playingSound) {
+                                          logFirebaseEvent(
+                                              'IconButton_play_sound');
+                                          _model.soundPlayer1 ??= AudioPlayer();
+                                          if (_model.soundPlayer1!.playing) {
+                                            await _model.soundPlayer1!.stop();
+                                          }
+                                          _model.soundPlayer1!.setVolume(1.0);
+                                          _model.soundPlayer1!
+                                              .setAsset(
+                                                  'assets/audios/01_White_Noise_01.mp3')
+                                              .then((_) =>
+                                                  _model.soundPlayer1!.play());
+                                        } else {
+                                          logFirebaseEvent(
+                                              'IconButton_stop_sound');
+                                          _model.soundPlayer1?.stop();
+                                        }
                                       },
                                     ),
                                   ],
@@ -237,8 +262,32 @@ class _StudyWidgetState extends State<StudyWidget> {
                                         color: Colors.white,
                                         size: 30.0,
                                       ),
-                                      onPressed: () {
-                                        print('IconButton pressed ...');
+                                      onPressed: () async {
+                                        logFirebaseEvent(
+                                            'STUDY_PAGE_play_arrow_ICN_ON_TAP');
+                                        logFirebaseEvent(
+                                            'IconButton_update_page_state');
+                                        _model.playingSound =
+                                            !_model.playingSound;
+                                        safeSetState(() {});
+                                        if (_model.playingSound) {
+                                          logFirebaseEvent(
+                                              'IconButton_play_sound');
+                                          _model.soundPlayer2 ??= AudioPlayer();
+                                          if (_model.soundPlayer2!.playing) {
+                                            await _model.soundPlayer2!.stop();
+                                          }
+                                          _model.soundPlayer2!.setVolume(1.0);
+                                          _model.soundPlayer2!
+                                              .setAsset(
+                                                  'assets/audios/mixkit-jungle-rain-and-birds-2392.mp3')
+                                              .then((_) =>
+                                                  _model.soundPlayer2!.play());
+                                        } else {
+                                          logFirebaseEvent(
+                                              'IconButton_stop_sound');
+                                          _model.soundPlayer2?.stop();
+                                        }
                                       },
                                     ),
                                   ],

@@ -93,7 +93,12 @@ List<dynamic> prepareChatHistory(
   List<dynamic> chatHistory,
   String newChat,
 ) {
-  chatHistory.add({"role": "user", "contentuser": newChat.trim()});
+  newChat = newChat.trim();
+  //String pre =
+  //"You are a motivational AI assistant for an attention span improvement app called Focusr. Your goal is to help users stay focused and improve their attention span by providing personalized advice, answering questions, and offering encouragement. Use the user’s progress data to recommend tasks like the Posner Cueing Task, N-Back Task, or Visual Search Task, and suggest strategies to stay consistent. Keep your responses engaging, supportive, and goal-oriented. For example, if a user asks how to improve focus, recommend specific tasks or techniques, explain their benefits, and suggest a schedule based on their history. If they feel discouraged, provide positive reinforcement and highlight their achievements to motivate them. I will provide you the questiion below. Remember, you are the helpful ai assistant";
+  //newChat = pre + newChat;
+  chatHistory.add({"role": "user", "content": newChat.trim()});
+
   return chatHistory;
 }
 

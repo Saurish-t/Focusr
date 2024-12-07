@@ -263,7 +263,7 @@ class _ChatbotCopyWidgetState extends State<ChatbotCopyWidget> {
                                                     Text(
                                                       getJsonField(
                                                         chatCurrentItem,
-                                                        r'''$.contentuser''',
+                                                        r'''$.content''',
                                                       ).toString(),
                                                       style: FlutterFlowTheme
                                                               .of(context)
@@ -418,6 +418,10 @@ class _ChatbotCopyWidgetState extends State<ChatbotCopyWidget> {
                                 FFAppState().currentConversation.toList())
                             .toList()
                             .cast<dynamic>();
+                        logFirebaseEvent('Button_wait__delay');
+                        await Future.delayed(const Duration(milliseconds: 600));
+                        logFirebaseEvent('Button_update_app_state');
+
                         safeSetState(() {});
                       }
 
