@@ -135,156 +135,123 @@ class _ChatbotCopyWidgetState extends State<ChatbotCopyWidget> {
                             itemBuilder: (context, chatCurrentIndex) {
                               final chatCurrentItem =
                                   chatCurrent[chatCurrentIndex];
+                              final String contentAI =
+                                  getJsonField(chatCurrentItem, r'''$.contentAI''')?.toString() ?? '';
+                              final String contentUser =
+                                  getJsonField(chatCurrentItem, r'''$.content''')?.toString() ?? '';
                               return Padding(
                                 padding: EdgeInsets.all(12.0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              constraints: BoxConstraints(
-                                                maxWidth:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        0.8,
-                                              ),
-                                              decoration: BoxDecoration(
-                                                gradient: LinearGradient(
-                                                  colors: [
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary,
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondary
-                                                  ],
-                                                  stops: [0.0, 1.0],
-                                                  begin: AlignmentDirectional(
-                                                      0.0, -1.0),
-                                                  end: AlignmentDirectional(
-                                                      0, 1.0),
+                                    if (contentAI.isNotEmpty)
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                constraints: BoxConstraints(
+                                                  maxWidth: MediaQuery.sizeOf(context).width * 0.8,
                                                 ),
-                                                borderRadius: BorderRadius.only(
-                                                  bottomLeft:
-                                                      Radius.circular(4.0),
-                                                  bottomRight:
-                                                      Radius.circular(16.0),
-                                                  topLeft:
-                                                      Radius.circular(16.0),
-                                                  topRight:
-                                                      Radius.circular(16.0),
+                                                decoration: BoxDecoration(
+                                                  gradient: LinearGradient(
+                                                    colors: [
+                                                      FlutterFlowTheme.of(context).primary,
+                                                      FlutterFlowTheme.of(context).secondary
+                                                    ],
+                                                    stops: [0.0, 1.0],
+                                                    begin: AlignmentDirectional(0.0, -1.0),
+                                                    end: AlignmentDirectional(0, 1.0),
+                                                  ),
+                                                  borderRadius: BorderRadius.only(
+                                                    bottomLeft: Radius.circular(4.0),
+                                                    bottomRight: Radius.circular(16.0),
+                                                    topLeft: Radius.circular(16.0),
+                                                    topRight: Radius.circular(16.0),
+                                                  ),
                                                 ),
-                                              ),
-                                              child: Padding(
-                                                padding: EdgeInsets.all(10.0),
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: [
-                                                    Text(
-                                                      getJsonField(
-                                                        chatCurrentItem,
-                                                        r'''$.contentAI''',
-                                                      ).toString(),
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
-                                                          .bodyMedium
-                                                          .override(
-                                                            fontFamily: 'Inter',
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .alternate,
-                                                            letterSpacing: 0.0,
-                                                            fontWeight:
-                                                                FontWeight.w600,
-                                                            lineHeight: 1.3,
-                                                          ),
-                                                    ),
-                                                  ],
+                                                child: Padding(
+                                                  padding: EdgeInsets.all(10.0),
+                                                  child: Column(
+                                                    mainAxisSize: MainAxisSize.max,
+                                                    children: [
+                                                      Text(
+                                                        contentAI,
+                                                        style: FlutterFlowTheme.of(context)
+                                                            .bodyMedium
+                                                            .override(
+                                                              fontFamily: 'Inter',
+                                                              color: FlutterFlowTheme.of(context).alternate,
+                                                              letterSpacing: 0.0,
+                                                              fontWeight: FontWeight.w600,
+                                                              lineHeight: 1.3,
+                                                            ),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                              constraints: BoxConstraints(
-                                                maxWidth:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        0.8,
-                                              ),
-                                              decoration: BoxDecoration(
-                                                gradient: LinearGradient(
-                                                  colors: [
-                                                    FlutterFlowTheme.of(context)
-                                                        .tertiary,
-                                                    FlutterFlowTheme.of(context)
-                                                        .primary
-                                                  ],
-                                                  stops: [0.0, 1.0],
-                                                  begin: AlignmentDirectional(
-                                                      0.0, -1.0),
-                                                  end: AlignmentDirectional(
-                                                      0, 1.0),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    if (contentUser.isNotEmpty)
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        children: [
+                                          Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Container(
+                                                constraints: BoxConstraints(
+                                                  maxWidth: MediaQuery.sizeOf(context).width * 0.8,
                                                 ),
-                                                borderRadius: BorderRadius.only(
-                                                  bottomLeft:
-                                                      Radius.circular(16.0),
-                                                  bottomRight:
-                                                      Radius.circular(4.0),
-                                                  topLeft:
-                                                      Radius.circular(16.0),
-                                                  topRight:
-                                                      Radius.circular(16.0),
+                                                decoration: BoxDecoration(
+                                                  gradient: LinearGradient(
+                                                    colors: [
+                                                      FlutterFlowTheme.of(context).tertiary,
+                                                      FlutterFlowTheme.of(context).primary
+                                                    ],
+                                                    stops: [0.0, 1.0],
+                                                    begin: AlignmentDirectional(0.0, -1.0),
+                                                    end: AlignmentDirectional(0, 1.0),
+                                                  ),
+                                                  borderRadius: BorderRadius.only(
+                                                    bottomLeft: Radius.circular(16.0),
+                                                    bottomRight: Radius.circular(4.0),
+                                                    topLeft: Radius.circular(16.0),
+                                                    topRight: Radius.circular(16.0),
+                                                  ),
                                                 ),
-                                              ),
-                                              child: Padding(
-                                                padding: EdgeInsets.all(10.0),
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  children: [
-                                                    Text(
-                                                      getJsonField(
-                                                        chatCurrentItem,
-                                                        r'''$.content''',
-                                                      ).toString(),
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
-                                                          .bodyMedium
-                                                          .override(
-                                                            fontFamily: 'Inter',
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .secondaryBackground,
-                                                            letterSpacing: 0.0,
-                                                            lineHeight: 1.3,
-                                                          ),
-                                                    ),
-                                                  ],
+                                                child: Padding(
+                                                  padding: EdgeInsets.all(10.0),
+                                                  child: Column(
+                                                    mainAxisSize: MainAxisSize.max,
+                                                    children: [
+                                                      Text(
+                                                        contentUser,
+                                                        style: FlutterFlowTheme.of(context)
+                                                            .bodyMedium
+                                                            .override(
+                                                              fontFamily: 'Inter',
+                                                              color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                              letterSpacing: 0.0,
+                                                              lineHeight: 1.3,
+                                                            ),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                   ],
                                 ),
                               );
